@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -40,7 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private void initBaidu() {
         wvView.loadUrl("https://www.baidu.com");
         WebSettings webSettings = wvView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+//        打开缩放开关，隐藏缩放按钮，部分页面适配JS代码关闭了手动放大缩小
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+
+//        webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         wvView.setWebViewClient(new WebViewClient() {
             @Override
@@ -87,4 +93,5 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onDestroy();
     }
+
 }
